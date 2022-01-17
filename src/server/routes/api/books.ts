@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { tokenCheck } from '../../middleware/tokenCheck.mw';
+import { tokenCheck } from '../../middleware/tokenCheck.mw';  //  *tk ! add tokencheck to CRUD routes 
 import { Books, ReqUser } from '../../types';
 import booksDB from '../../database/queries/books'
 
@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 
-//get all
+//get all ✅ OK
 router.get('/', async (req, res) => {
 
     try {
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 })
 
 
-//get one by id
+//get one by id ✅ OK
 router.get('/:id', async (req, res) => {
 
     const id = Number(req.params.id);
@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-//create one
+//create one ✅ OK
 
 router.post('/', async (req: ReqUser, res) => {
 
@@ -70,7 +70,7 @@ router.post('/', async (req: ReqUser, res) => {
     }
 })
 
-//update one by id
+//update one by id ✅ OK
 router.put('/:id', async (req: ReqUser, res) => {
     try {
 
@@ -100,12 +100,7 @@ router.put('/:id', async (req: ReqUser, res) => {
     }
 })
 
-
-
-
-
-
-// delete
+// delete ✅ OK
 
 router.delete('/:id', async (req, res) => {
 

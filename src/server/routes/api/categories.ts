@@ -1,11 +1,9 @@
 import * as express from 'express';
-import { ReqUser } from '../../types';
-import { tokenCheck } from '../../middleware/tokenCheck.mw';
 import categoriesDB from '../../database/queries/categories'
 
 const router = express.Router();
 
-// get all
+// get all ✅ OK
 
 router.get('/', async (req, res) => {
 
@@ -20,7 +18,7 @@ router.get('/', async (req, res) => {
 
 })
 
-//get one by id
+//get one by id ✅ OK
 
 router.get('/:id', async (req, res) => {
 

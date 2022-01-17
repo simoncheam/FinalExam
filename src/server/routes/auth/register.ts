@@ -1,3 +1,4 @@
+// ✅ OK
 import * as jwt from 'jsonwebtoken';
 import config, { jwt_config } from '../../config';
 import usersDB from '../../database/queries/users';
@@ -6,7 +7,6 @@ import { generateHash } from '../../utils/passwords'
 
 const router = Router();
 
-// ✅ OK
 router.post('/', async (req, res) => {
 
     const newUser = req.body;
