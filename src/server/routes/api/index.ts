@@ -9,3 +9,5 @@ const router = Router();
 router.use('/books', booksRouter)
 router.use('/categories', categoriesRouter)
 router.use('/users', usersRouter)
+
+export default router;

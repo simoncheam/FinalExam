@@ -6,7 +6,7 @@ import { generateHash } from '../../utils/passwords'
 
 const router = Router();
 
-
+// ✅ OK
 router.post('/', async (req, res) => {
 
     const newUser = req.body;

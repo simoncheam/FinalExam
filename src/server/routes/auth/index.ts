@@ -1,3 +1,4 @@
+//✅ OK
 import { Router } from 'express'
 
 
@@ -9,6 +10,6 @@ const router = Router();
 
 router.use('/register', registerRouter)
 router.use('/login', loginRouter)
-router.use('/valida', validateRouter)
+router.use('/validate', validateRouter)
 
 export default router;
