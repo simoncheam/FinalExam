@@ -8,22 +8,29 @@ const BookDetail = () => {
 
     let params = useParams();
     const book_id = params.id;
-    const [book, setBook] = useState<Books[]>()
-    const [category, setCategory] = useState<Categories[]>()
     const nav = useNavigate();
+    const [book, setBook] = useState<Books>()
+    const [category, setCategory] = useState<Categories>()
+    const [categoryId, setCategoryId] = useState<number>()
+    const [categoryName, setCategoryName] = useState<string>('')
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
 
     useEffect(() => {
 
-        APIService(`/api/books/${book_id}`, 'GET')
-            .then((data: Books[]) => {
+        APIService(`/api/books/${book_id}`)
+            .then((data: Books) => {
                 setBook(data)
+                console.log({ book });
+                setCategoryId(data.categoryid)
+                console.log({ categoryId });
+
                 setIsLoaded(true)
-
-                APIService(`/api/categories/${book}`, 'GET')
-                    .then((data: Categories[]) => {
-
+                APIService(`/api/categories/${book.categoryid}`)
+                    .then((data: Categories) => {
+                        setCategory(data)
+                        setCategoryName(data.name)
+                        console.log({ category });
 
 
 
@@ -44,7 +51,7 @@ const BookDetail = () => {
     }, [isLoaded])
 
 
-    if (!isLoaded) { return <> Loading...</> }
+    if (!book) { return <> Loading...</> }
 
 
 
@@ -55,18 +62,18 @@ const BookDetail = () => {
 
             <div className="row justify-content-center m-2">
                 <div className="col-md-6">
-                    <h1>📕 {book}</h1>
+                    <h1>📕 {book.title}</h1>
                     <div className="card shadow">
                         <div className="card-body">
-                            <h5 className="card-title">Author: {book.b_author} </h5>
-                            <h6 className="card-subtitle mb-2 text-muted">Category: {book.cat_name}</h6>
-                            <p className="card-text">Price: {book.b_price.toLocaleString('en-US',
+                            <h5 className="card-title">Author:{book.author}  </h5>
+                            <h6 className="card-subtitle mb-2 text-muted">Category:{categoryName} </h6>
+                            <p className="card-text">Price: {book.price.toLocaleString('en-US',
                                 {
                                     style: 'currency',
                                     currency: 'USD',
                                 })} </p>
                             <button onClick={() => nav(-1)} className="row btn btn-primary m-2">Go Back </button>
-                            <Link to={`/books/${book.book_id}`} className="row btn btn-warning m-2">Read More </Link>
+                            <Link to={`/books/${Number(book_id)}`} className="row btn btn-warning m-2">Update </Link>
                         </div>
                     </div>
                 </div>

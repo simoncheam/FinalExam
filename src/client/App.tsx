@@ -34,6 +34,8 @@ const App = (props: AppProps) => {
 				<Route path='/books' element={<PrivateWrapper />}>
 
 					{/* update book */}
+					<Route path='/books/:id/update' element={<NewBook />}> Create Book </Route>
+
 
 					{/* Create book */}
 

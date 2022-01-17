@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const id = Number(req.params.id);
 
     try {
-        const one_category = await categoriesDB.get_one_by_id(id);
+        const [one_category] = await categoriesDB.get_one_by_id(id);
 
         //does user exist check? if/else
         res.status(200).json(one_category);
