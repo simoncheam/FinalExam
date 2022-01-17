@@ -73,7 +73,7 @@ const BookDetail = () => {
                                     currency: 'USD',
                                 })} </p>
                             <button onClick={() => nav(-1)} className="row btn btn-primary m-2">Go Back </button>
-                            <Link to={`/books/${Number(book_id)}`} className="row btn btn-warning m-2">Update </Link>
+                            <Link to={`/books/${book_id}/update`} className="row btn btn-warning m-2">Update </Link>
                         </div>
                     </div>
                 </div>

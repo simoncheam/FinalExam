@@ -1,14 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router'
+import { APIService } from '../services/APIService'
 
 const PrivateWrapper = ({ children }: PrivateRouteProps) => {
-    return (
-        <div>
-            <h1 className="display-3 m-3 text-center"> Private Wrapper </h1>
-            <Outlet />
-            {children}
 
-        </div>
+    const [isAuthed, setIsAuthed] = useState(false)
+
+
+    useEffect(() => {
+
+        APIService('/auth/validate')
+            .then(res => {
+
+                const tokenStatus = res.message === 'valid';
+                console.log({ tokenStatus });
+                setIsAuthed(tokenStatus)
+
+            })
+            .catch(e => {
+                console.log(e)
+
+            })
+
+    }, [])
+
+
+
+    return (
+        <>
+            {/* <h1 className="display-3 m-3 text-center"> Private Wrapper </h1> */}
+            {children}
+            <Outlet />
+
+        </>
     )
 }
 

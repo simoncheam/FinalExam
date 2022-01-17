@@ -9,6 +9,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import NewBook from './views/NewBook';
 import Register from './views/Register';
+import UpdateBook from './views/UpdateBook';
 
 
 const App = (props: AppProps) => {
@@ -31,10 +32,11 @@ const App = (props: AppProps) => {
 				<Route path='/books/:id' element={<BookDetail />}> BookDetail </Route>
 
 
-				<Route path='/books' element={<PrivateWrapper />}>
+				<Route path='/' element={<PrivateWrapper />}>
 
 					{/* update book */}
-					<Route path='/books/:id/update' element={<NewBook />}> Create Book </Route>
+					<Route path='/books/:book_id/update' element={<UpdateBook />} />
+					<Route path='/books/:book_id/new' element={<NewBook />} />
 
 
 					{/* Create book */}
