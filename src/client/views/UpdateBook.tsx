@@ -43,15 +43,13 @@ const UpdateBook = () => {
 
 
 
-
-
             }).catch(e => {
                 console.log(e);
             });
 
 
 
-    }, [isLoaded])
+    }, [])
 
     useEffect(() => {
 
@@ -125,7 +123,7 @@ const UpdateBook = () => {
 
 
 
-    if (!book) { return <> Loading...</> }
+    //if (!book) { return <> Loading...</> }
 
 
 

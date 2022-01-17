@@ -40,7 +40,7 @@ const Books = () => {
             <div>
                 {books.map(book => (
 
-                    <div className="row justify-content-center m-2">
+                    <div key={book.book_id} className="row justify-content-center m-2">
                         <div className="col-md-6">
                             <h1>📕 {book.b_title}</h1>
                             <div className="card shadow">

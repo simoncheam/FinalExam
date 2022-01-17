@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet } from 'react-router'
+import { Navigate, Outlet } from 'react-router'
 import { APIService } from '../services/APIService'
 
 const PrivateWrapper = ({ children }: PrivateRouteProps) => {
 
     const [isAuthed, setIsAuthed] = useState(false)
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
+
 
 
     useEffect(() => {
@@ -15,6 +17,7 @@ const PrivateWrapper = ({ children }: PrivateRouteProps) => {
                 const tokenStatus = res.message === 'valid';
                 console.log({ tokenStatus });
                 setIsAuthed(tokenStatus)
+                setIsLoaded(true)
 
             })
             .catch(e => {
@@ -24,16 +27,22 @@ const PrivateWrapper = ({ children }: PrivateRouteProps) => {
 
     }, [])
 
+    if (!isLoaded) { return <> Loading...</> }
+    if (!isAuthed) {
+        return <Navigate to='/login' />
+    } else {
 
 
-    return (
-        <>
-            {/* <h1 className="display-3 m-3 text-center"> Private Wrapper </h1> */}
-            {children}
-            <Outlet />
 
-        </>
-    )
+        return (
+            <>
+                {/* <h1 className="display-3 m-3 text-center"> Private Wrapper </h1> */}
+                {children}
+                <Outlet />
+
+            </>
+        )
+    }
 }
 
 interface PrivateRouteProps {
