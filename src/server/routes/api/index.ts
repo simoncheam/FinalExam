@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import booksRouter from './books'
 import categoriesRouter from './categories'
-import usersRouter from './users'
+import usersRouter from './books'
 
 const router = Router();
 
