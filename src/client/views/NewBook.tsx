@@ -54,6 +54,7 @@ const NewBook = () => {
             })
             .catch(e => {
                 console.log(e)
+                nav(`/login`)
             })
 
     }

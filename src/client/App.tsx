@@ -27,16 +27,14 @@ const App = (props: AppProps) => {
 				<Route path='/register' element={<Register />}> Register </Route>
 				<Route path='/login' element={<Login />}> Login </Route>
 				<Route path='/books' element={<Books />}> Books </Route>
-				<Route path='/books/new' element={<NewBook />}> Create Book </Route>
-
 				<Route path='/books/:id' element={<BookDetail />}> BookDetail </Route>
 
 
 				<Route path='/' element={<PrivateWrapper />}>
 
 					{/* update book */}
-					<Route path='/books/:book_id/update' element={<UpdateBook />} />
-					<Route path='/books/:book_id/new' element={<NewBook />} />
+					<Route path='books/:id/update' element={<UpdateBook />} />
+					<Route path='books/new' element={<NewBook />} />
 
 
 					{/* Create book */}

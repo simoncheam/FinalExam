@@ -4,7 +4,7 @@ import { APIService } from '../services/APIService'
 
 const PrivateWrapper = ({ children }: PrivateRouteProps) => {
 
-    const [isAuthed, setIsAuthed] = useState(false)
+    const [isAuthed, setIsAuthed] = useState<boolean>(false)
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
 
@@ -22,6 +22,7 @@ const PrivateWrapper = ({ children }: PrivateRouteProps) => {
             })
             .catch(e => {
                 console.log(e)
+                setIsLoaded(true)
 
             })
 

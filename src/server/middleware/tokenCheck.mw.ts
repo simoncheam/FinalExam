@@ -1,6 +1,6 @@
 import * as passport from 'passport';
-import {Request, Response, NextFunction} from 'express';
-import {ReqUser} from '../types';
+import { Request, Response, NextFunction } from 'express';
+import { ReqUser } from '../types';
 
 export function tokenCheck(req: ReqUser, res: Response, next: NextFunction) {
 
@@ -11,31 +11,31 @@ export function tokenCheck(req: ReqUser, res: Response, next: NextFunction) {
             return next(err)
         }
 
-        if (info){
+        if (info) {
             return res.status(401).json({
                 message: 'Error while authenticating, please log in again',
                 error: info.message
             });
         }
 
-        if(!user) {
+        if (!user) {
 
             return res.redirect('/login')
 
         }
 
 
-        if(user) {
+        if (user) {
 
             console.log('INSIDE TOKENCHECK if(user) block:');
             delete user.password;
-            
-            
+
+
             console.log('Token is good!');
             req.user = user;
         }
         next();
 
-    })(req, res, next)  
+    })(req, res, next)
 
 };

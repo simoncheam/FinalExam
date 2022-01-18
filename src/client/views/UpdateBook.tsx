@@ -19,53 +19,54 @@ const UpdateBook = () => {
     const [bookTitle, setBookTitle] = useState('')
     const [bookAuthor, setBookAuthor] = useState('')
     const [bookPrice, setBookPrice] = useState<number>(null)
-    const [isLoaded, setIsLoaded] = useState<boolean>(false)
     const [book, setBook] = useState<Books>()
     const [categoryId, setCategoryId] = useState<number>()
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
 
 
     useEffect(() => {
 
+        //API stuff
+
         APIService(`/api/books/${book_id}`)
             .then((data: Books) => {
+                console.log({ data });
+                // state stuff
                 setBook(data)
-                console.log({ book });
-                setSelectedCategoryId(book.categoryid)
-                setBookAuthor(data.author)
-                setBookPrice(Number(data.price))
 
+                // set book placeholders
                 setCategoryId(data.categoryid)
-                console.log({ categoryId });
+                setSelectedCategoryId(data.categoryid)
+
+                setBookTitle(data.title)
+                setBookAuthor(data.author);
+                setBookPrice(data.price);
+
 
                 setIsLoaded(true)
 
 
 
+                APIService(`/api/categories`)
+                    .then(data => {
 
-            }).catch(e => {
-                console.log(e);
-            });
+                        // state stuff
+                        setCategories(data);
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
 
-
-
-    }, [])
-
-    useEffect(() => {
-
-        APIService(`/api/categories/`)
-            .then((data: Categories[]) => {
-                setCategories(data)
-
-
-
-
-            }).catch(e => {
-                console.log(e);
-            });
-
+            })
+            .catch(e => {
+                console.log(e)
+            })
 
     }, [])
+
+
+
 
     const handleUpdateButton = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -123,7 +124,7 @@ const UpdateBook = () => {
 
 
 
-    //if (!book) { return <> Loading...</> }
+    if (!book || !categories) { return <> Loading...</> }
 
 
 
@@ -163,26 +164,29 @@ const UpdateBook = () => {
                                     <label>Title:</label>
                                     <input className="form-control"
                                         value={bookTitle} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookTitle(e.target.value)}
-                                        placeholder='your title'
+                                        placeholder={book.title}
                                         type='text' />
 
                                     <label>Author:</label>
                                     <input className="form-control"
                                         value={bookAuthor} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookAuthor(e.target.value)}
 
-                                        placeholder='your author'
+                                        placeholder={book.author}
                                         type='text' />
 
                                     <label>Price:</label>
                                     <input className="form-control"
                                         value={bookPrice} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBookPrice(Number(e.target.value))}
 
-                                        placeholder='your price'
+                                        placeholder={book.price.toLocaleString('en-US', {
+                                            style: 'currency',
+                                            currency: 'USD',
+                                        })}
                                         type='number' />
 
                                     <button onClick={handleUpdateButton} className='btn btn-success mt-3'> Click to update book!</button>
                                     <button onClick={handleDeleteButton} className='btn btn-danger mt-3'> DELETE</button>
-                                    <button onClick={() => nav(-1)} className='row btn btn-primary m-2' >Go Back</button>
+                                    <button onClick={() => nav(-1)} className='row btn btn-primary mt-3' >Go Back</button>
 
                                 </form>
                             </div>

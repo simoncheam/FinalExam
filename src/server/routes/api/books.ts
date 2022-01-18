@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 
 //create one ✅ OK
 
-router.post('/', async (req: ReqUser, res) => {
+router.post('/', tokenCheck, async (req: ReqUser, res) => {
 
     const { title, author, price, categoryid }: Books = req.body;
 
@@ -71,7 +71,7 @@ router.post('/', async (req: ReqUser, res) => {
 })
 
 //update one by id ✅ OK
-router.put('/:id', async (req: ReqUser, res) => {
+router.put('/:id', tokenCheck, async (req: ReqUser, res) => {
     try {
 
         const id = Number(req.params.id);
@@ -102,7 +102,7 @@ router.put('/:id', async (req: ReqUser, res) => {
 
 // delete ✅ OK
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', tokenCheck, async (req, res) => {
 
     const id = Number(req.params.id);
 
