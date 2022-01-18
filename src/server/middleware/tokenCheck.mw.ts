@@ -20,7 +20,9 @@ export function tokenCheck(req: ReqUser, res: Response, next: NextFunction) {
 
         if (!user) {
 
-            return res.redirect('/login')
+            return res.status(404).json({
+                error: 'Error: User not found'
+            })
 
         }
 
