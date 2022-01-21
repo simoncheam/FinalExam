@@ -20,17 +20,17 @@ const BookDetail = () => {
 
         APIService(`/api/books/${book_id}`)
             .then((data: Books) => {
-                setBook(data)
-                console.log({ book });
-                setCategoryId(data.categoryid)
-                console.log({ categoryId });
 
+                setBook(data)
+                setCategoryId(data.categoryid)
                 setIsLoaded(true)
+
+
                 APIService(`/api/categories/${book.categoryid}`)
                     .then((data: Categories) => {
+
                         setCategory(data)
                         setCategoryName(data.name)
-                        console.log({ category });
 
 
 

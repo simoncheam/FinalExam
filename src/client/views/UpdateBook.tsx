@@ -11,16 +11,15 @@ const UpdateBook = () => {
 
 
 
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number>()
-
-
-    const [categories, setCategories] = useState<Categories[]>([])
-
+    const [book, setBook] = useState<Books>()
     const [bookTitle, setBookTitle] = useState('')
     const [bookAuthor, setBookAuthor] = useState('')
     const [bookPrice, setBookPrice] = useState<number>(null)
-    const [book, setBook] = useState<Books>()
-    const [categoryId, setCategoryId] = useState<number>()
+
+    const [selectedCategoryId, setSelectedCategoryId] = useState<number>()
+
+    const [categories, setCategories] = useState<Categories[]>([])
+
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
 
@@ -36,7 +35,6 @@ const UpdateBook = () => {
                 setBook(data)
 
                 // set book placeholders
-                setCategoryId(data.categoryid)
                 setSelectedCategoryId(data.categoryid)
 
                 setBookTitle(data.title)
@@ -184,9 +182,9 @@ const UpdateBook = () => {
                                         })}
                                         type='number' />
 
-                                    <button onClick={handleUpdateButton} className='btn btn-success mt-3'> Click to update book!</button>
-                                    <button onClick={handleDeleteButton} className='btn btn-danger mt-3'> DELETE</button>
-                                    <button onClick={() => nav(-1)} className='row btn btn-primary mt-3' >Go Back</button>
+                                    <button onClick={() => nav(-1)} className='row btn btn-primary m-3' >Go Back</button>
+                                    <button onClick={handleUpdateButton} className='btn btn-success m-3'> Click to update book!</button>
+                                    <button onClick={handleDeleteButton} className='btn btn-danger m-3'> DELETE</button>
 
                                 </form>
                             </div>
